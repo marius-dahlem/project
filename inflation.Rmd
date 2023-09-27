@@ -15,6 +15,18 @@ repro:
     - data/raw/inflation.rds
 ---
 
+
+```{r}
+# use a function without loading the package:
+# package::function
+usethis::use_git_config(
+  user.name = "Marius Dahlem", # <-- change to your name
+  user.email = "dahlemma@hu-berlin.de", # <-- and your email
+  init.defaultBranch = "main") # <-- not necessary but kinder than 'master'
+
+usethis::use_git()
+```
+
 ```{r setup, include=FALSE}
 repro::automate_load_packages()
 repro::automate_load_scripts()
@@ -50,6 +62,10 @@ inflation %>%
   ungroup() %>% 
   ggplot() +
   geom_line(aes(date, value, color = name)) +
+  theme_minimal() +
+  ylab("subjective inflation in %-points") +
+  labs(color = "") +
+  theme(legend.position = c(.1, .9)) +
   NULL
 ```
 
